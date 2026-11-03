@@ -13,8 +13,8 @@
   --noir:#14120e;
   --vert:#02341b;
   --vert-clair:#d4f8cd;
-  --bleu:#1e56e8;
   --teal:#2b8a9e;
+  --bleu:#1e56e8;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -25,87 +25,96 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px;
+  padding:28px;
 }
-.card{max-width:560px;width:100%;text-align:center;position:relative}
-.bird{position:absolute;top:-40px;right:-10px;width:110px;opacity:.95;transform:rotate(8deg)}
+.wrap{max-width:920px;width:100%;display:flex;gap:56px;align-items:center;justify-content:center}
+.cover{
+  flex:0 0 300px;
+  border-radius:6px;
+  box-shadow:14px 18px 40px rgba(20,18,14,.22);
+  transform:rotate(-2deg);
+  display:block;width:300px;
+}
+.main{flex:1;max-width:500px;text-align:center;position:relative}
+.bird{position:absolute;top:-58px;right:-16px;width:96px;opacity:.95}
 h1{
   font-family:'Gentium Plus',serif;
-  font-size:2.3rem;
-  font-weight:700;
-  letter-spacing:.02em;
-  line-height:1.15;
+  font-size:2.4rem;font-weight:700;letter-spacing:.02em;line-height:1.1;
 }
-.rule{width:180px;height:3px;background:var(--teal);border-radius:2px;margin:18px auto 26px}
-.script{
-  font-family:'Tangerine',cursive;
-  font-size:2rem;
-  line-height:1.15;
-  color:var(--noir);
-}
-.intro{margin-bottom:34px}
-form{background:#fff;border-radius:16px;padding:34px 30px;box-shadow:0 10px 40px rgba(20,18,14,.07);text-align:left}
-label.field{display:block;font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--vert);margin-bottom:6px}
+.rule{width:150px;height:3px;background:var(--teal);border-radius:2px;margin:16px auto 20px}
+.script{font-family:'Tangerine',cursive;font-size:2.1rem;line-height:1.12;color:var(--noir)}
+.desc{font-weight:300;font-size:1.02rem;line-height:1.65;color:#3a372f;margin:18px auto 30px;max-width:400px}
+form{background:#fff;border-radius:16px;padding:32px 30px;box-shadow:0 12px 44px rgba(20,18,14,.09);text-align:left}
+label.field{display:block;font-size:.78rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--vert);margin-bottom:6px}
 input[type=text],input[type=email]{
-  width:100%;padding:13px 15px;margin-bottom:16px;
-  border:1.5px solid #cfc9ba;border-radius:10px;
+  width:100%;padding:13px 15px;margin-bottom:15px;
+  border:1.5px solid #d3cdbf;border-radius:10px;
   font-family:inherit;font-size:1rem;background:var(--creme);color:var(--noir);
 }
 input:focus{outline:2px solid var(--vert);border-color:var(--vert)}
 .checkline{
   display:flex;align-items:flex-start;gap:10px;
-  background:var(--vert-clair);border-radius:10px;padding:14px 16px;margin-bottom:20px;
-  font-size:.95rem;line-height:1.45;cursor:pointer;
+  background:var(--vert-clair);border-radius:10px;padding:13px 15px;margin-bottom:18px;
+  font-size:.94rem;line-height:1.45;cursor:pointer;
 }
 .checkline input{margin-top:4px;accent-color:var(--vert);width:18px;height:18px;flex-shrink:0}
 .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
 button{
   width:100%;padding:16px;border:none;border-radius:10px;
   background:var(--vert);color:#fff;font-family:inherit;font-size:1.05rem;font-weight:600;
-  letter-spacing:.03em;cursor:pointer;transition:background .2s;
+  letter-spacing:.03em;cursor:pointer;transition:background .2s,transform .15s;
 }
-button:hover{background:#0a4a2a}
+button:hover{background:#0a4a2a;transform:translateY(-1px)}
 button:disabled{opacity:.6;cursor:default}
-.rgpd{margin-top:16px;font-size:.76rem;color:#6b6455;line-height:1.5;text-align:center}
+.rgpd{margin-top:15px;font-size:.75rem;color:#6b6455;line-height:1.5;text-align:center}
 #done{display:none}
 #done h2{font-family:'Gentium Plus',serif;font-size:1.7rem;margin-bottom:10px}
 #done p{line-height:1.6}
 .err{color:#a33;font-size:.85rem;margin-top:10px;text-align:center;display:none}
-.sig{font-family:'Tangerine',cursive;font-size:1.9rem;color:var(--noir);margin-top:30px}
-@media (max-width:600px){.bird{width:80px;top:-30px;right:0}h1{font-size:1.8rem}}
+.sig{font-family:'Tangerine',cursive;font-size:1.9rem;color:var(--noir);margin-top:28px}
+@media (max-width:820px){
+  .wrap{flex-direction:column;gap:34px}
+  .cover{width:200px;flex:none;transform:rotate(-1.5deg)}
+  .bird{top:-44px;right:0;width:74px}
+  h1{font-size:1.9rem}
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <img class="bird" src="colibri.png" alt="Colibri ORA"/>
-  <form id="form" novalidate>
+<div class="wrap">
+  <img class="cover" src="couverture.png" alt="Couverture du mini-livre Tu t'arrêtes quand ?"/>
+  <div class="main">
+    <img class="bird" src="colibri-hd.png" alt="Colibri ORA"/>
     <h1>TU T'ARRÊTES QUAND&nbsp;?</h1>
     <div class="rule"></div>
-    <p class="script intro">Prête à explorer les petites surprises<br/>de ton quotidien&nbsp;?</p>
+    <p class="script">Prête à explorer les petites surprises<br/>de ton quotidien&nbsp;?</p>
+    <p class="desc">Un petit guide pour observer tes habitudes, t'accorder une place et expérimenter un premier changement dans ton quotidien.</p>
 
-    <label class="field" for="prenom">Ton prénom</label>
-    <input type="text" id="prenom" name="prenom" autocomplete="given-name" required placeholder="Camille"/>
+    <form id="form" novalidate>
+      <label class="field" for="prenom">Ton prénom</label>
+      <input type="text" id="prenom" name="prenom" autocomplete="given-name" required placeholder="Camille"/>
 
-    <label class="field" for="email">Ton adresse e-mail</label>
-    <input type="email" id="email" name="email" autocomplete="email" required placeholder="camille@exemple.fr"/>
+      <label class="field" for="email">Ton adresse e-mail</label>
+      <input type="email" id="email" name="email" autocomplete="email" required placeholder="camille@exemple.fr"/>
 
-    <label class="checkline">
-      <input type="checkbox" id="lettres" name="lettres"/>
-      <span>Je veux aussi recevoir <strong>les lettres d'ORA</strong> — des réflexions et des pistes pour avancer vers une vie qui me ressemble. <em>(facultatif)</em></span>
-    </label>
+      <label class="checkline">
+        <input type="checkbox" id="lettres" name="lettres"/>
+        <span>Je veux aussi recevoir <strong>les lettres d'ORA</strong> — des réflexions et des pistes pour avancer vers une vie qui me ressemble. <em>(facultatif)</em></span>
+      </label>
 
-    <input class="hp" type="text" name="entreprise" tabindex="-1" autocomplete="off"/>
+      <input class="hp" type="text" name="entreprise" tabindex="-1" autocomplete="off"/>
 
-    <button type="submit" id="btn">Recevoir mon mini-livre</button>
-    <p class="err" id="err">Une erreur est survenue — réessaie dans un instant.</p>
-    <p class="rgpd">Ton e-mail sert uniquement à t'envoyer le mini-livre (et les lettres si tu coches). Jamais transmis, désinscription à tout moment.</p>
-  </form>
+      <button type="submit" id="btn">Recevoir le mini livre</button>
+      <p class="err" id="err">Une erreur est survenue — réessaie dans un instant.</p>
+      <p class="rgpd">Ton e-mail sert uniquement à t'envoyer le mini-livre (et les lettres si tu coches). Jamais transmis, désinscription à tout moment.</p>
+    </form>
 
-  <div id="done">
-    <h2>C'est parti&nbsp;!</h2>
-    <p class="script">Ton mini-livre arrive par e-mail<br/>dans quelques instants.</p>
+    <div id="done">
+      <h2>C'est parti&nbsp;!</h2>
+      <p class="script">Ton mini-livre arrive par e-mail<br/>dans quelques instants.</p>
+    </div>
+    <p class="sig">Le voyage vers soi est une aventure.</p>
   </div>
-  <p class="sig">Le voyage vers soi est une aventure.</p>
 </div>
 
 <script>
