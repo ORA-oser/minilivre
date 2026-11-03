@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ORA — Ton mini-livre « Tu t'arrêtes quand ? »</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=Palanquin:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --vert-profond:#1e3d2f;
+  --vert-sauge:#8fa98f;
+  --blanc-casse:#faf8f3;
+  --vert-doux:#e8efe8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Palanquin',sans-serif;
+  background:var(--blanc-casse);
+  color:var(--vert-profond);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.card{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 8px 40px rgba(30,61,47,.08);
+  max-width:520px;
+  width:100%;
+  padding:48px 40px;
+  text-align:center;
+}
+h1{
+  font-family:'Gentium Plus',serif;
+  font-size:1.9rem;
+  font-weight:700;
+  line-height:1.25;
+  margin-bottom:16px;
+}
+.intro{
+  font-size:1.05rem;
+  font-weight:300;
+  line-height:1.6;
+  color:#3d5a4a;
+  margin-bottom:32px;
+}
+label.field{
+  display:block;
+  text-align:left;
+  font-size:.85rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  margin-bottom:6px;
+}
+input[type=text],input[type=email]{
+  width:100%;
+  padding:14px 16px;
+  margin-bottom:18px;
+  border:1.5px solid var(--vert-sauge);
+  border-radius:10px;
+  font-family:inherit;
+  font-size:1rem;
+  color:var(--vert-profond);
+  background:var(--blanc-casse);
+}
+input:focus{outline:2px solid var(--vert-profond);border-color:var(--vert-profond)}
+.checkline{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  text-align:left;
+  background:var(--vert-doux);
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:22px;
+  font-size:.95rem;
+  line-height:1.45;
+  cursor:pointer;
+}
+.checkline input{margin-top:4px;accent-color:var(--vert-profond);width:18px;height:18px;flex-shrink:0}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:10px;
+  background:var(--vert-profond);
+  color:#fff;
+  font-family:inherit;
+  font-size:1.05rem;
+  font-weight:600;
+  letter-spacing:.03em;
+  cursor:pointer;
+  transition:background .2s;
+}
+button:hover{background:#2a5442}
+button:disabled{opacity:.6;cursor:default}
+.rgpd{
+  margin-top:18px;
+  font-size:.78rem;
+  color:#5f7568;
+  line-height:1.5;
+}
+#done{display:none}
+#done h2{font-family:'Gentium Plus',serif;font-size:1.5rem;margin-bottom:12px}
+#done p{line-height:1.6;color:#3d5a4a}
+.err{color:#a33;font-size:.85rem;margin-top:10px;display:none}
+.sig{font-family:'Gentium Plus',serif;font-style:italic;color:var(--vert-sauge);margin-top:28px;font-size:.95rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <form id="form" novalidate>
+    <h1>Le mini-livre<br/>« Tu t'arrêtes quand ? »</h1>
+    <p class="intro">Un premier temps pour toi — des choses à observer, peut-être quelques déclics. Reçois-le gratuitement par e-mail.</p>
+
+    <label class="field" for="prenom">Ton prénom</label>
+    <input type="text" id="prenom" name="prenom" autocomplete="given-name" required placeholder="Camille"/>
+
+    <label class="field" for="email">Ton adresse e-mail</label>
+    <input type="email" id="email" name="email" autocomplete="email" required placeholder="camille@exemple.fr"/>
+
+    <label class="checkline">
+      <input type="checkbox" id="lettres" name="lettres"/>
+      <span>Je veux aussi recevoir <strong>les lettres d'ORA</strong> — des réflexions et des pistes pour avancer vers une vie qui me ressemble davantage. <em>(facultatif, désinscription à tout moment)</em></span>
+    </label>
+
+    <input class="hp" type="text" name="entreprise" tabindex="-1" autocomplete="off"/>
+
+    <button type="submit" id="btn">Recevoir mon mini-livre</button>
+    <p class="err" id="err">Une erreur est survenue — réessaie dans un instant.</p>
+    <p class="rgpd">Ton e-mail sert uniquement à t'envoyer le mini-livre (et les lettres si tu coches la case). Jamais transmis, jamais de spam. <a href="#">En savoir plus</a>.</p>
+    <p class="sig">ORA — le voyage vers soi est une aventure.</p>
+  </form>
+
+  <div id="done">
+    <h2>C'est parti !</h2>
+    <p>Ton mini-livre arrive par e-mail dans quelques instants.<br/>
+    Vérifie ta boîte (et les spams, au cas où).<br/><br/>
+    <em>ORA — le voyage vers soi est une aventure.</em></p>
+  </div>
+</div>
+
+<script>
+const ENDPOINT = "https://ukeafayhcojhuuubcbwj.supabase.co/functions/v1/inscription";
+
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("btn");
+  const err = document.getElementById("err");
+  err.style.display = "none";
+  btn.disabled = true;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prenom: document.getElementById("prenom").value,
+        email: document.getElementById("email").value,
+        lettres: document.getElementById("lettres").checked,
+        entreprise: e.target.entreprise.value,
+      }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      document.getElementById("form").style.display = "none";
+      document.getElementById("done").style.display = "block";
+    } else throw new Error(data.error || "ko");
+  } catch {
+    err.style.display = "block";
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
