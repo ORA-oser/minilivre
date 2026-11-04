@@ -33,9 +33,6 @@ button:hover{background:#002f18;transform:translateY(-1px)}
 button:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 button:disabled{opacity:.6;cursor:default}
 .rgpd{margin-top:13px;font-size:.75rem;color:#333;line-height:1.5;text-align:center}
-#done{display:none}
-#done h2{font-family:'Gentium Plus',serif;font-size:1.7rem;margin-bottom:10px}
-#done p{line-height:1.6}
 .err{display:none;margin-top:10px;color:#8b1e1e;font-size:.85rem;text-align:center}
 .sig-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin:31px auto 0}
 .sig{font-family:'Tangerine',cursive;font-size:2.3rem;line-height:1;color:var(--ink);text-align:center}
@@ -82,10 +79,6 @@ button:disabled{opacity:.6;cursor:default}
       <p class="rgpd">Ton e-mail sert uniquement à t'envoyer le mini-livre (et les lettres si tu coches). Jamais transmis, désinscription à tout moment.</p>
     </form>
 
-    <div id="done">
-      <h2>C'est parti&nbsp;!</h2>
-      <p class="script">Ton mini-livre arrive par e-mail<br/>dans quelques instants.</p>
-    </div>
     <div class="sig-wrap">
       <p class="sig">Le voyage vers soi est une aventure.</p>
       <img class="sig-bird" src="colibri.png" alt="" aria-hidden="true"/>
@@ -113,8 +106,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     });
     const data = await res.json();
     if (data.ok) {
-      document.getElementById("form").style.display = "none";
-      document.getElementById("done").style.display = "block";
+      location.href = "merci.html";
     } else throw new Error(data.error || "ko");
   } catch { err.style.display = "block"; btn.disabled = false; }
 });
