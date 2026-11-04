@@ -1,0 +1,4 @@
+project_id = "ukeafayhcojhuuubcbwj"
+
+[functions.inscription]
+verify_jwt = false
