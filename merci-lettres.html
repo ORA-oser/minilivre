@@ -10,32 +10,40 @@
 <style>
 :root{--paper:#FAF9F6;--ink:#000;--green:#003C1F;--light:#DFF8C1}
 *{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;background:var(--paper);color:var(--ink);font-family:'Palanquin',sans-serif;padding:34px 22px 48px;display:flex;align-items:center;justify-content:center}
-.main{width:100%;max-width:500px;margin:0 auto;text-align:center}
+body{min-height:100vh;min-height:100svh;background:var(--paper);color:var(--ink);display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(min-content,1fr) auto;padding:clamp(18px,3vw,34px) clamp(14px,4vw,22px) clamp(20px,4vw,48px)}
+.brand{display:grid;justify-items:center;align-content:start}
+.main{width:100%;max-width:500px;margin:0 auto;display:grid;place-items:center;align-content:center;gap:clamp(14px,2.4vw,24px);text-align:center}
 .bird{display:block;width:124px;height:auto;margin:0 auto 25px}
 .rule{display:block;width:230px;max-width:62%;height:auto;margin:22px auto 23px}
-.script{font-family:'Tangerine',cursive;font-size:2.2rem;line-height:1.35;color:var(--ink);max-width:420px;margin:0 auto}
-.sig-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin:34px auto 0}
+.thank-title{font-family:'Gentium Plus',serif;font-size:clamp(1.5rem,2.4vw,1.85rem);font-weight:400;line-height:1.28}
+.thanks-copy{font-family:'Palanquin',sans-serif;font-size:1.05rem;line-height:1.6}
+.sig-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 auto}
 .sig{font-family:'Tangerine',cursive;font-size:2.3rem;line-height:1;color:var(--ink);text-align:center}
 .sig-bird{width:46px;height:auto;display:block;flex:0 0 auto}
 @media(max-width:600px){
+ body{padding:20px 16px 24px}
  .bird{width:108px;margin-bottom:21px}
- .rule{width:190px;margin:19px auto 19px}
- .script{font-size:1.9rem}
+ .rule{width:190px;margin:19px auto}
+ .main{gap:18px}
+ .thank-title{font-size:1.45rem}
+ .thanks-copy{font-size:1rem}
  .sig{font-size:2.05rem}
  .sig-bird{width:40px}
 }
 </style>
 </head>
 <body>
-<main class="main">
+<header class="brand" aria-label="ORA">
   <img class="bird" src="colibri-hd.png" alt="Colibri ORA"/>
   <img class="rule" src="trait-mini-livre-sans-fond.png" alt="" aria-hidden="true"/>
-  <p class="script">Merci, tu es maintenant inscrite à la newsletter ORA.<br/>Tu recevras prochainement de nos nouvelles.</p>
-  <div class="sig-wrap">
-    <p class="sig">Le voyage vers soi est une aventure.</p>
-    <img class="sig-bird" src="colibri.png" alt="" aria-hidden="true"/>
-  </div>
+</header>
+<main class="main">
+  <h1 class="thank-title">Merci, tu es maintenant inscrite aux Lettres d'ORA</h1>
+  <p class="thanks-copy">Tu recevras bientôt de nos nouvelles</p>
 </main>
+<footer class="sig-wrap">
+  <p class="sig">Le voyage vers soi est une aventure.</p>
+  <img class="sig-bird" src="colibri.png" alt="" aria-hidden="true"/>
+</footer>
 </body>
 </html>
