@@ -106,7 +106,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     });
     const data = await res.json();
     if (data.ok) {
-      location.href = "merci.html";
+      location.href = data.lettres ? "merci.html" : "merci-attente.html";
     } else throw new Error(data.error || "ko");
   } catch { err.style.display = "block"; btn.disabled = false; }
 });
