@@ -1,0 +1,36 @@
+name: check-deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      URL: https://minilivre.ora-oser.fr
+      NOM: minilivre
+      ATTENDU: mini-livre
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - name: Attendre le déploiement Pages puis vérifier la prod
+        run: |
+          sleep 90
+          ok=0
+          code="?"
+          for i in 1 2; do
+            code=$(curl -s -o /tmp/page.html -w '%{http_code}' --max-time 30 "$URL")
+            if [ "$code" = "200" ] && grep -q "$ATTENDU" /tmp/page.html; then
+              ok=1
+              break
+            fi
+            [ "$i" = "1" ] && sleep 60
+          done
+          if [ "$ok" = "1" ]; then
+            payload=$(printf '{"topic":"%s","title":"PROD %s : deploye OK","message":"%s repond 200, contenu attendu present.","priority":2,"tags":["white_check_mark"],"click":"%s"}' "$NTFY_TOPIC" "$NOM" "$URL" "$URL")
+          else
+            payload=$(printf '{"topic":"%s","title":"PROD %s : CASSE","message":"%s -> HTTP %s (ou contenu attendu absent). A verifier tout de suite.","priority":5,"tags":["rotating_light"],"click":"%s"}' "$NTFY_TOPIC" "$NOM" "$URL" "$code" "$URL")
+          fi
+          curl -s -X POST https://ntfy.sh/ -H 'Content-Type: application/json' -d "$payload"
